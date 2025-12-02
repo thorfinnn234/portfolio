@@ -11,7 +11,7 @@ const projects = [
     title: "Velvet Plate",
     role: "Full-stack · Resturant Website",
     ImageUrl:
-      "src/assets/images/velvet2.png",
+      "/velvet2.png",
     description:
       "A modern Resturant platform for placing orders with payments, and a clean, minimal UI.",
     stack: ["React", "MongoDB", "Tailwind CSS"],
@@ -23,9 +23,9 @@ const projects = [
     title: "Multimart",
     role: "FrontEnd · E-commerce",
     ImageUrl:
-      "src/assets/images/multimart.png",
+      "/multimart.png",
     description:
-      "Real estate platform for browsing properties, managing agents and adding homes with a simple workflow.",
+      "An E-commerce website with features like product search, filtering, and a shopping cart.",
     stack: ["React", "CSS", "Supabase"],
     live: "#",
     github: "https://github.com/thorfinnn234/multimart.git",
@@ -34,7 +34,7 @@ const projects = [
   {
     title: "Travelogue",
     role: "Moblie App · Travel App",
-    ImageUrl: "src/assets/images/ChatGPT Image Nov 22, 2025, 06_47_59 PM.png",
+    ImageUrl: "public/ChatGPT Image Nov 22, 2025, 06_47_59 PM.png",
     description:
       "An app where people share there experience of places they have been to.",
     stack: ["React Native ", "Expo", "Supabase"],
@@ -45,7 +45,7 @@ const projects = [
   {
     title: "Tic-tac-toe Game",
     role: "Game · Tic-tac-toe",
-    ImageUrl: "src/assets/images/tic-tac-image.png",
+    ImageUrl: "/tic-tac-image.png",
     description:
       "A simple tic-tac-toe game where two players can play against each other.",
     stack: ["Pure JavaScript", "React", "CSS"],
@@ -56,7 +56,7 @@ const projects = [
   {
     title: "Go Ticket",
     role: "Fullstack · Ticketing System",
-    ImageUrl: "src/assets/images/goticketttt.png",
+    ImageUrl: "/goticketttt.png",
     description:
       "A ticketing system that allows users to purchase, manage, and track support tickets efficiently.",
     stack: ["React JS", "Talwind CSS", "Node JS", "MongoDB"],
