@@ -34,7 +34,7 @@ const projects = [
   {
     title: "Travelogue",
     role: "Moblie App · Travel App",
-    ImageUrl: "public/ChatGPT Image Nov 22, 2025, 06_47_59 PM.png",
+    ImageUrl: "/travelouge.png",
     description:
       "An app where people share there experience of places they have been to.",
     stack: ["React Native ", "Expo", "Supabase"],
