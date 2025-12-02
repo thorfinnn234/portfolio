@@ -32,7 +32,7 @@ const skillCategories = [
       { name: "React.js", icon: FaReact },
       { name: "HTML & CSS", icon: FaHtml5 },
       { name: "Tailwind CSS", icon: SiTailwindcss },
-      { name: "TypeScript", icon: SiTypescript },
+      { name: "JavaScript", icon: SiJavascript },
     ],
   },
   {
