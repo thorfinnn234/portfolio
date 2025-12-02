@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import {
   SiTailwindcss,
-  SiTypescript,
+  SiJavascript,
   SiSpringboot,
   SiMongodb,
   SiSupabase,
@@ -86,10 +86,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section
-      id="skills"
-      className="bg-white border-t border-zinc-100 py-20"
-    >
+    <section id="skills" className="bg-white border-t border-zinc-100 py-20">
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
         <div className="mb-10">
@@ -115,9 +112,7 @@ export default function Skills() {
               <h3 className="text-sm font-semibold tracking-tight text-black">
                 {category.title}
               </h3>
-              <p className="mt-1 text-xs text-zinc-500">
-                {category.subtitle}
-              </p>
+              <p className="mt-1 text-xs text-zinc-500">{category.subtitle}</p>
 
               <div className="mt-4 flex flex-wrap gap-3">
                 {category.skills.map((skill) => {
