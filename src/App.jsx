@@ -11,7 +11,7 @@ import DownloadResume from "./components/DownloadResume";
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-white text-black dark:bg-slate-950 dark:text-slate-100">
+    <div className="relative min-h-screen bg-white text-black">
       {/* Fixed navbar */}
       <Navbar />
 
