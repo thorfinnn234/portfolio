@@ -7,16 +7,14 @@ export const useTheme = () => useContext(ThemeContext);
 export default function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("light");
 
-  // On first load: read from localStorage or system preference
+  // On first load: read from localStorage, default to light mode (ignore OS preference)
   useEffect(() => {
     try {
       const stored = localStorage.getItem("theme");
       if (stored === "light" || stored === "dark") {
         setTheme(stored);
-      } else if (window.matchMedia) {
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        setTheme(prefersDark ? "dark" : "light");
       }
+      // If no stored preference, default to light (don't check OS preference)
     } catch (e) {
       setTheme("light");
     }
