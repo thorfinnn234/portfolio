@@ -3,15 +3,13 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronDown, Github, ExternalLink } from "lucide-react";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
     title: "Velvet Plate",
     role: "Full-stack · Resturant Website",
-    ImageUrl:
-      "/velvet2.png",
+    ImageUrl: "/velvet2.png",
     description:
       "A modern Resturant platform for placing orders with payments, and a clean, minimal UI.",
     stack: ["React", "MongoDB", "Tailwind CSS"],
@@ -22,8 +20,7 @@ const projects = [
   {
     title: "Multimart",
     role: "FrontEnd · E-commerce",
-    ImageUrl:
-      "/multimart.png",
+    ImageUrl: "/multimart.png",
     description:
       "An E-commerce website with features like product search, filtering, and a shopping cart.",
     stack: ["React", "CSS", "Supabase"],
@@ -213,6 +210,25 @@ export default function Projects() {
             </div>
           </article>
         ))}
+        <div  className="mt-10 relative w-fit mx-auto">
+          <a
+            href=""
+            className="
+              relative overflow-hidden
+              flex items-center justify-center
+              border border-black px-8 py-3
+              text-sm font-medium text-black
+              transition-colors 
+              before:absolute before:inset-0 before:bg-black
+              before:w-0 before:origin-left before:scale-x-0
+              before:transition-all before:duration-300
+              hover:text-white
+              hover:before:w-full hover:before:scale-x-100
+            "
+          >
+            <span className="relative z-10">View More Projects</span>
+          </a>
+        </div>
       </div>
     </section>
   );
