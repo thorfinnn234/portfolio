@@ -1,7 +1,7 @@
 import React from "react";
 import { Download } from "lucide-react";
 
-const RESUME_URL = "/resume.pdf"; 
+const RESUME_URL = "/My resumee.pdf"; 
 // 👉 put your actual resume file as public/resume.pdf
 
 export default function DownloadResume() {
