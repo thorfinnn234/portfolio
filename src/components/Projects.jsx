@@ -7,6 +7,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    title: "Artelix",
+    role: "Fullstack · Artisan Website",
+    ImageUrl: "/artisanDashborad.png",
+    description:
+      "An artisan website that allows users hire artisans for various services, showcasing their portfolios and facilitating communication.",
+    stack: ["React JS", "Talwind CSS", "Node JS", "MongoDB"],
+    live: "#",
+    github: "#",
+    accent: "#0000FF",
+  },
+  {
+    title: "Go Ticket",
+    role: "Fullstack · Ticketing System",
+    ImageUrl: "/goticketttt.png",
+    description:
+      "A ticketing system that allows users to purchase, manage, and track support tickets efficiently.",
+    stack: ["React JS", "Talwind CSS", "Node JS", "MongoDB"],
+    live: "https://go-tickets.vercel.app/",
+    github: "#",
+    accent: "#22c55e",
+  },
+  {
     title: "Velvet Plate",
     role: "Full-stack · Resturant Website",
     ImageUrl: "/velvet2.png",
@@ -16,17 +38,6 @@ const projects = [
     live: "#", // TODO: put your real live link
     github: "https://github.com/thorfinnn234/velvet-plate.git", // TODO: your GitHub repo
     accent: "#6366f1",
-  },
-  {
-    title: "Multimart",
-    role: "FrontEnd · E-commerce",
-    ImageUrl: "/multimart.png",
-    description:
-      "An E-commerce website with features like product search, filtering, and a shopping cart.",
-    stack: ["React", "CSS", "Supabase"],
-    live: "#",
-    github: "https://github.com/thorfinnn234/multimart.git",
-    accent: "#0f172a",
   },
   {
     title: "Travelogue",
@@ -40,6 +51,18 @@ const projects = [
     accent: "#f97316",
   },
   {
+    title: "Multimart",
+    role: "FrontEnd · E-commerce",
+    ImageUrl: "/multimart.png",
+    description:
+      "An E-commerce website with features like product search, filtering, and a shopping cart.",
+    stack: ["React", "CSS", "Supabase"],
+    live: "#",
+    github: "https://github.com/thorfinnn234/multimart.git",
+    accent: "#0f172a",
+  },
+  
+  {
     title: "Tic-tac-toe Game",
     role: "Game · Tic-tac-toe",
     ImageUrl: "/tic-tac-image.png",
@@ -48,17 +71,6 @@ const projects = [
     stack: ["Pure JavaScript", "React", "CSS"],
     live: "#",
     github: "https://github.com/thorfinnn234/tic-tac.git",
-    accent: "#22c55e",
-  },
-  {
-    title: "Go Ticket",
-    role: "Fullstack · Ticketing System",
-    ImageUrl: "/goticketttt.png",
-    description:
-      "A ticketing system that allows users to purchase, manage, and track support tickets efficiently.",
-    stack: ["React JS", "Talwind CSS", "Node JS", "MongoDB"],
-    live: "https://go-tickets.vercel.app/",
-    github: "#",
     accent: "#22c55e",
   },
 ];
@@ -85,7 +97,7 @@ export default function Projects() {
               end: "top 35%",
               scrub: true,
             },
-          }
+          },
         );
       });
     }, containerRef);
@@ -210,9 +222,9 @@ export default function Projects() {
             </div>
           </article>
         ))}
-        <div  className="mt-10 relative w-fit mx-auto">
+        <div className="mt-10 relative w-fit mx-auto">
           <a
-            href=""
+            href="https://github.com/thorfinnn234"
             className="
               relative overflow-hidden
               flex items-center justify-center

@@ -79,7 +79,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="min-h-[80vh] flex items-center bg-white">
+    <section ref={heroRef} className="min-h-[40vh] flex items-center bg-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 text-center">
         {/* Big name */}
         <h1

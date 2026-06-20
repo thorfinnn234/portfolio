@@ -8,7 +8,6 @@ import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import DownloadResume from "./components/DownloadResume";
-
 export default function App() {
   return (
     <div className="relative min-h-screen bg-white text-black">
