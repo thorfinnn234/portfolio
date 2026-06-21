@@ -5,7 +5,7 @@ const RandomSection = () => {
     
   return (
     <div>
-      <h1></h1>
+      <h1>HIII</h1>
     </div>
   )
 }
