@@ -9,7 +9,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-6xl flex items-center justify-between px-4 sm:px-6 py-4">
         {/* Logo */}
         <a className="text-3xl font-semibold tracking-wide  text-black">
-          H O<span className="text-zinc-700 text-4xl">.</span>
+          HO<span className="text-zinc-700 text-4xl">.</span>
         </a>
 
         {/* Desktop Nav */}
