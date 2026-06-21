@@ -50,18 +50,7 @@ const projects = [
     github: "https://github.com/thorfinnn234/travelogue.git",
     accent: "#f97316",
   },
-  {
-    title: "Multimart",
-    role: "FrontEnd · E-commerce",
-    ImageUrl: "/multimart.png",
-    description:
-      "An E-commerce website with features like product search, filtering, and a shopping cart.",
-    stack: ["React", "CSS", "Supabase"],
-    live: "#",
-    github: "https://github.com/thorfinnn234/multimart.git",
-    accent: "#0f172a",
-  },
-  
+
   {
     title: "Tic-tac-toe Game",
     role: "Game · Tic-tac-toe",
@@ -72,6 +61,17 @@ const projects = [
     live: "#",
     github: "https://github.com/thorfinnn234/tic-tac.git",
     accent: "#22c55e",
+  },
+  {
+    title: "Multimart",
+    role: "FrontEnd · E-commerce",
+    ImageUrl: "/multimart.png",
+    description:
+      "An E-commerce website with features like product search, filtering, and a shopping cart.",
+    stack: ["React", "CSS", "Supabase"],
+    live: "#",
+    github: "https://github.com/thorfinnn234/multimart.git",
+    accent: "#0f172a",
   },
 ];
 
