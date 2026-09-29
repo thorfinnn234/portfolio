@@ -7,6 +7,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    title: "EliteBnB",
+    role: "A fullstack Apartment Booking Website",
+    ImageUrl: "/elite-img.png",
+    description:
+      "An artisan website that allows users hire artisans for various services, showcasing their portfolios and facilitating communication.",
+    stack: ["React JS", "Talwind CSS", "Spring-Boot", "PostgreSQL", "Docker", "Jenkins", "JUnit"],
+    live: "#",
+    github: "https://github.com/thorfinnn234/EliteBNB.git",
+    accent: "#0000FF",
+  },
+  {
     title: "Artelix",
     role: "Fullstack · Artisan Website",
     ImageUrl: "/artisanDashborad.png",
@@ -14,7 +25,7 @@ const projects = [
       "An artisan website that allows users hire artisans for various services, showcasing their portfolios and facilitating communication.",
     stack: ["React JS", "Talwind CSS", "Node JS", "MongoDB"],
     live: "#",
-    github: "#",
+    github: "https://github.com/thorfinnn234/Artelix.git",
     accent: "#0000FF",
   },
   {
@@ -62,6 +73,8 @@ const projects = [
     github: "https://github.com/thorfinnn234/tic-tac.git",
     accent: "#22c55e",
   },
+
+
   {
     title: "Multimart",
     role: "FrontEnd · E-commerce",
