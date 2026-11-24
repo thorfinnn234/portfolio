@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { fadeUp, stagger, inView } from "./motion";
 import {
   FaReact,
   FaHtml5,
@@ -84,29 +86,51 @@ const skillCategories = [
   },
 ];
 
+const chip = {
+  hidden: { opacity: 0, scale: 0.8 },
+  show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 300, damping: 20 } },
+};
+
 export default function Skills() {
   return (
     <section id="skills" className="bg-white border-t border-zinc-100 py-20">
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
-        <div className="mb-10">
-          <p className="text-xs uppercase tracking-[0.25em] text-zinc-500 mb-3">
+        <motion.div className="mb-10" {...inView} variants={stagger(0.1)}>
+          <motion.p
+            variants={fadeUp}
+            className="text-xs uppercase tracking-[0.25em] text-zinc-500 mb-3"
+          >
             Skills
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-black">
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            className="text-2xl sm:text-3xl font-semibold tracking-tight text-black"
+          >
             Technologies I work with.
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-zinc-600 max-w-2xl">
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mt-3 text-sm sm:text-base text-zinc-600 max-w-2xl"
+          >
             A mix of frontend, backend, databases and tools I use to build
             modern web and mobile experiences.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Grid of categories */}
-        <div className="grid gap-8 md:grid-cols-2">
+        <motion.div
+          className="grid gap-8 md:grid-cols-2"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={stagger(0.1)}
+        >
           {skillCategories.map((category) => (
-            <div
+            <motion.div
               key={category.title}
+              variants={{ ...fadeUp, show: { ...fadeUp.show, transition: { ...fadeUp.show.transition, staggerChildren: 0.05, delayChildren: 0.2 } } }}
+              whileHover={{ y: -4, boxShadow: "0 12px 30px -12px rgba(0,0,0,0.15)" }}
               className="border border-zinc-200 bg-zinc-50 px-5 py-5 sm:px-6 sm:py-6"
             >
               <h3 className="text-sm font-semibold tracking-tight text-black">
@@ -118,19 +142,22 @@ export default function Skills() {
                 {category.skills.map((skill) => {
                   const Icon = skill.icon;
                   return (
-                    <div
+                    <motion.div
                       key={skill.name}
-                      className="inline-flex items-center gap-2 border border-zinc-200 bg-white px-3 py-1.5 text-[11px] text-zinc-800 hover:border-black hover:bg-black hover:text-white transition-colors"
+                      variants={chip}
+                      whileHover={{ scale: 1.08, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="group inline-flex items-center gap-2 border border-zinc-200 bg-white px-3 py-1.5 text-[11px] text-zinc-800 hover:border-black hover:bg-black hover:text-white transition-colors"
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
                       <span>{skill.name}</span>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

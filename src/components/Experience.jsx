@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { ease, fadeUp, inView } from "./motion";
 
 const experiences = [
   {
@@ -83,87 +81,55 @@ const experiences = [
 
 export default function Experience() {
   const [activeId, setActiveId] = useState("independent");
-  const containerRef = useRef(null);
-  const detailsRef = useRef(null);
-
   const active = experiences.find((exp) => exp.id === activeId);
 
-  // Scroll animation
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".exp-heading", {
-        opacity: 0,
-        y: 20,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-      });
-
-      gsap.from(".exp-layout", {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%",
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Switch animation
-  useEffect(() => {
-    if (!detailsRef.current) return;
-    gsap.fromTo(
-      detailsRef.current,
-      { opacity: 0, y: 10 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      }
-    );
-  }, [activeId]);
-
   return (
-    <section
-      id="experience"
-      ref={containerRef}
-      className="bg-white py-20 border-t border-zinc-200"
-    >
+    <section id="experience" className="bg-white py-20 border-t border-zinc-200">
       <div className="mx-auto max-w-6xl px-6">
-
-        <h2 className="exp-heading text-3xl sm:text-4xl font-semibold tracking-tight text-black mb-10">
+        <motion.h2
+          {...inView}
+          variants={fadeUp}
+          className="text-3xl sm:text-4xl font-semibold tracking-tight text-black mb-10"
+        >
           Experience<span className="text-black">.</span>
-        </h2>
+        </motion.h2>
 
-        <div className="exp-layout flex flex-col gap-10 md:flex-row">
-
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease }}
+          className="flex flex-col gap-10 md:flex-row"
+        >
           {/* LEFT TABS */}
           <div className="md:w-1/3">
-            <div className="border-l border-black/10">
+            <div className="relative border-l border-black/10">
               {experiences.map((exp) => {
                 const isActive = exp.id === activeId;
                 return (
                   <button
                     key={exp.id}
                     onClick={() => setActiveId(exp.id)}
-                    className={`
-                      w-full text-left pl-5 pr-3 py-3 text-sm transition-colors
-                      border-l-2 -ml-[1px]
-                      ${isActive
-                        ? "text-black font-semibold border-black"
-                        : "text-zinc-500 hover:text-black border-transparent"}
-                    `}
+                    className={`relative w-full text-left pl-5 pr-3 py-3 text-sm transition-colors ${
+                      isActive ? "text-black font-semibold" : "text-zinc-500 hover:text-black"
+                    }`}
                   >
-                    {exp.label}
+                    {/* Sliding active indicator + highlight */}
+                    {isActive && (
+                      <>
+                        <motion.span
+                          layoutId="exp-indicator"
+                          className="absolute -left-px top-0 h-full w-0.5 bg-black"
+                          transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                        />
+                        <motion.span
+                          layoutId="exp-bg"
+                          className="absolute inset-0 bg-zinc-50"
+                          transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                        />
+                      </>
+                    )}
+                    <span className="relative">{exp.label}</span>
                   </button>
                 );
               })}
@@ -171,31 +137,43 @@ export default function Experience() {
           </div>
 
           {/* RIGHT DETAILS */}
-          <div className="md:w-2/3" ref={detailsRef}>
+          <div className="md:w-2/3 min-h-[260px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, ease }}
+              >
+                <p className="text-sm uppercase tracking-[0.2em] text-zinc-500 mb-2">
+                  {active.company}
+                </p>
 
-            <p className="text-sm uppercase tracking-[0.2em] text-zinc-500 mb-2">
-              {active.company}
-            </p>
+                <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-black">
+                  {active.title}
+                </h3>
 
-            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-black">
-              {active.title}
-            </h3>
+                <p className="mt-1 text-xs text-zinc-500">{active.period}</p>
 
-            <p className="mt-1 text-xs text-zinc-500">
-              {active.period}
-            </p>
-
-            <ul className="mt-6 space-y-3 text-sm text-zinc-700">
-              {active.points.map((point, idx) => (
-                <li key={idx} className="flex gap-3">
-                  <CheckCircle2 className="mt-1 h-4 w-4 text-black flex-shrink-0" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-
+                <ul className="mt-6 space-y-3 text-sm text-zinc-700">
+                  {active.points.map((point, idx) => (
+                    <motion.li
+                      key={idx}
+                      className="flex gap-3"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 + idx * 0.07, duration: 0.35 }}
+                    >
+                      <CheckCircle2 className="mt-1 h-4 w-4 text-black flex-shrink-0" />
+                      <span>{point}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

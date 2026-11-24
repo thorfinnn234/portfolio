@@ -1,138 +1,124 @@
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ease } from "./motion";
 
-gsap.registerPlugin(ScrollTrigger);
+const NAME = "HABEEB OREOLUWA";
+const roles = ["Software Developer", "Full-Stack Dev", "Problem Solver"];
 
 export default function Hero() {
   const heroRef = useRef(null);
-  const nameRef = useRef(null);
-  const rolesRef = useRef(null);
-  const buttonRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(heroRef.current, {
-        opacity: 0,
-        y: 40,
-        duration: 1.2,
-        ease: "power3.out",
-      });
-
-      gsap.from(nameRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 0.1,
-        ease: "power3.out",
-      });
-
-      gsap.from(rolesRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        delay: 0.25,
-        ease: "power3.out",
-      });
-
-      gsap.from(buttonRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        delay: 0.4,
-        ease: "power3.out",
-      });
-
-      // Parallax animations
-      gsap.to(nameRef.current, {
-        yPercent: -10,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      gsap.to(rolesRef.current, {
-        yPercent: -6,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      gsap.to(buttonRef.current, {
-        yPercent: -4,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
+  // Parallax: layers drift up at different speeds and fade as you scroll
+  const nameY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const rolesY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const btnY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={heroRef} className="min-h-[40vh] flex items-center bg-white">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 text-center">
-        {/* Big name */}
-        <h1
-          ref={nameRef}
-          className="
-            text-3xl 
-            sm:text-5xl 
-            md:text-7xl 
-            font-semibold tracking-wide 
-            text-black leading-tight
-          "
+    <section
+      ref={heroRef}
+      className="min-h-[60vh] flex items-center justify-center bg-white"
+    >
+      <motion.div
+        style={{ opacity }}
+        className="mx-auto max-w-6xl px-4 sm:px-6 text-center"
+      >
+        {/* Big name – letters rise in one by one */}
+        <motion.h1
+          style={{ y: nameY }}
+          aria-label={NAME}
+          className="text-3xl sm:text-5xl md:text-7xl font-semibold tracking-wide text-black leading-tight"
+          initial="hidden"
+          animate="show"
+          variants={{ show: { transition: { staggerChildren: 0.04, delayChildren: 0.2 } } }}
         >
-          HABEEB OREOLUWA
-          <span className="text-zinc-400">.</span>
-        </h1>
+          {NAME.split(" ").map((word, w) => (
+            <React.Fragment key={w}>
+              {w > 0 && " "}
+              <span className="inline-block whitespace-nowrap" aria-hidden>
+                {word.split("").map((char, i) => (
+                  <span key={i} className="inline-block overflow-hidden align-bottom">
+                    <motion.span
+                      className="inline-block"
+                      variants={{
+                        hidden: { y: "110%" },
+                        show: { y: 0, transition: { duration: 0.7, ease } },
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  </span>
+                ))}
+              </span>
+            </React.Fragment>
+          ))}
+          <motion.span
+            className="inline-block text-zinc-400"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 1, type: "spring", stiffness: 400, damping: 12 }}
+          >
+            .
+          </motion.span>
+        </motion.h1>
 
         {/* Roles */}
-        <p
-          ref={rolesRef}
+        <motion.p
+          style={{ y: rolesY }}
           className="mt-4 text-sm sm:text-base text-neutral-600 tracking-wide"
+          initial="hidden"
+          animate="show"
+          variants={{ show: { transition: { staggerChildren: 0.15, delayChildren: 0.9 } } }}
         >
-          <span className="mr-2">Software Developer</span>
-          <span className="mx-1">|</span>
-          <span className="mr-2">Full-Stack Dev</span>
-          <span className="mx-1">|</span>
-          <span>Problem Solver</span>
-        </p>
+          {roles.map((role, i) => (
+            <motion.span
+              key={role}
+              className="inline-block"
+              variants={{
+                hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
+                show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5 } },
+              }}
+            >
+              {i > 0 && <span className="mx-3 text-zinc-300">|</span>}
+              {role}
+            </motion.span>
+          ))}
+        </motion.p>
 
-        <div ref={buttonRef} className="mt-10 relative w-fit mx-auto">
-          <a
+        {/* CTA */}
+        <motion.div
+          style={{ y: btnY }}
+          className="mt-10 relative w-fit mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4, duration: 0.6, ease }}
+        >
+          <motion.a
             href="#projects"
-            className="
-              relative overflow-hidden
-              flex items-center justify-center
-              border border-black px-8 py-3
-              text-sm font-medium text-black
-              transition-colors 
-              before:absolute before:inset-0 before:bg-black
-              before:w-0 before:origin-left before:scale-x-0
-              before:transition-all before:duration-300
-              hover:text-white
-              hover:before:w-full hover:before:scale-x-100
-            "
+            className="group relative overflow-hidden flex items-center justify-center border border-black px-8 py-3 text-sm font-medium text-black"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
           >
-            <span className="relative z-10">EXPLORE WORK</span>
-          </a>
+            <span className="absolute inset-0 bg-black origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+              EXPLORE WORK
+            </span>
+          </motion.a>
 
-          {/* Bouncing Arrow */}
-          <span className="absolute left-1/2 -translate-x-1/2 mt-2 text-xl text-black animate-bounce">
+          {/* Bouncing arrow */}
+          <motion.span
+            className="absolute left-1/2 -translate-x-1/2 mt-3 text-xl text-black"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
             ↓
-          </span>
-        </div>
-      </div>
+          </motion.span>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
