@@ -11,7 +11,7 @@ const projects = [
     description:
       "An artisan website that allows users hire artisans for various services, showcasing their portfolios and facilitating communication.",
     stack: ["React JS", "Talwind CSS", "Spring-Boot", "PostgreSQL", "Docker", "Jenkins", "JUnit"],
-    live: "#",
+    live: "https://elitebnb-src.vercel.app/",
     github: "https://github.com/thorfinnn234/EliteBNB.git",
     accent: "#0000FF",
   },
